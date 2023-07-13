@@ -59,7 +59,7 @@ app.post("/book", (req, res) => {
     slot: requestedSlot,
     bookingAmount,
   });
-
+  console.log(bookedFacilities);
   // Return the booking details
   res.json({ message: "Booked", bookingAmount });
 });
