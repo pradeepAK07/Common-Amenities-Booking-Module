@@ -1,0 +1,23 @@
+.two-container {
+  position: relative;
+  left: 665px;
+  padding: 20px;
+  box-shadow: 1px 1px 10px rgb(234, 91, 47);
+  width: 300px;
+  margin: 20px 0px;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  background-color: aliceblue;
+}
+.header-info {
+  margin: 0px;
+}
+.side-header {
+  margin: 10%;
+}
+.inside-container {
+  display: flex;
+
+  justify-content: center;
+}

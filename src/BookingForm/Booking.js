@@ -8,10 +8,6 @@ const Booking = () => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
-  const handleChange = (e) => {
-    setFacility(e.target.value);
-  };
-  console.log(date, startTime, endTime);
   const bookFacility = () => {
     // Check if all input fields are filled
     if (date !== "" && startTime !== "" && endTime !== "") {
@@ -23,10 +19,10 @@ const Booking = () => {
         (booking) =>
           booking.facility === facility &&
           booking.date === date &&
-          ((booking.startTime <= parsedStartTime &&
-            booking.endTime >= parsedStartTime) ||
-            (booking.startTime <= parsedEndTime &&
-              booking.endTime >= parsedEndTime))
+          ((booking.startTime < parsedStartTime &&
+            booking.endTime > parsedStartTime) ||
+            (booking.startTime < parsedEndTime &&
+              booking.endTime > parsedEndTime))
       );
 
       if (isBooked) {
@@ -49,7 +45,7 @@ const Booking = () => {
 
       // Create a new booking object and add it to the bookings array
       if (facility === "--- Select Facility ---" || facility === "") {
-        alert("select the facility");
+        alert("select the facility and fill the fields");
       } else {
         const newBooking = {
           facility,
@@ -60,7 +56,7 @@ const Booking = () => {
         };
         setBookings([...bookings, newBooking]);
 
-        alert(`Booked, Rs. ${bookingAmount}`);
+        alert(`Booked successfully, Rs. ${bookingAmount}`);
 
         // Reset the input fields after successful booking
         setFacility("");
@@ -78,7 +74,11 @@ const Booking = () => {
     <div className="form-container">
       <div className="form">
         <h2 className="header">Facility Booking</h2>
-        <select onChange={handleChange} className="dropdown" value={facility}>
+        <select
+          onChange={(e) => setFacility(e.target.value)}
+          className="dropdown"
+          value={facility}
+        >
           <option>--- Select Facility ---</option>
           <option>Clubhouse</option>
           <option>Tennis Court</option>
@@ -91,7 +91,7 @@ const Booking = () => {
         />
         <input
           type="text"
-          placeholder="Start Time                                 ex: 11:00"
+          placeholder="Start Time      ex: 11:00"
           className="input"
           value={startTime}
           onChange={(e) => setStartTime(e.target.value)}
@@ -99,7 +99,7 @@ const Booking = () => {
         <input
           type="text"
           className="input"
-          placeholder="End Time                                  ex: 16:00"
+          placeholder="End Time       ex: 16:00"
           value={endTime}
           onChange={(e) => setEndTime(e.target.value)}
         />
