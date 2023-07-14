@@ -19,10 +19,10 @@ const Booking = () => {
         (booking) =>
           booking.facility === facility &&
           booking.date === date &&
-          ((booking.startTime < parsedStartTime &&
-            booking.endTime > parsedStartTime) ||
-            (booking.startTime < parsedEndTime &&
-              booking.endTime > parsedEndTime))
+          ((booking.startTime <= parsedStartTime &&
+            booking.endTime >= parsedStartTime) ||
+            (booking.startTime <= parsedEndTime &&
+              booking.endTime >= parsedEndTime))
       );
 
       if (isBooked) {
